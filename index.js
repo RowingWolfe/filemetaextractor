@@ -1,18 +1,19 @@
 const express = require('express');
-const bodyParser = require('body-parser');
 const fileUpload = require('express-fileupload');
 
+//Config
 const app = express();
 const PORT = 3000;
-const fileDir = __dirname + '/files';
 
 //Middleware
 app.use(fileUpload());
 
-
 //Routes
 app.get('/', (req, res, next)=>{
     res.send(`
+    <h1>File goes in</h1>
+    <h2>Data comes out</h2>
+    <h3>That's what skulljack labs web concern is all about.</h3>
     <form ref='uploadForm' 
     id='uploadForm' 
     action='/upload' 
@@ -24,6 +25,7 @@ app.get('/', (req, res, next)=>{
     `);
 });
 
+//Upsy daisy.
 app.post('/upload', (req,res,next) =>{
     if (!req.files)
     return res.status(400).send('No files were uploaded.');
@@ -40,7 +42,7 @@ app.post('/upload', (req,res,next) =>{
     res.send(fileInfo);
 });
 
-
+//Wake up and do your job, server.
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
